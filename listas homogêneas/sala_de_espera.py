@@ -32,6 +32,51 @@ Observações
     No segundo exemplo de teste, Bruna consegue se sentar, no máximo, a 1 metro de qualquer outra cadeira ocupada.
 '''
 
+# tamanho, largura = [int(x) for x in input().split()]
+# maior_distância = 0
+# fileiras = []
+
+# for i in range(tamanho):
+#     fileira = [int(x) for x in input().split()]
+#     fileiras.append(fileira)
+
+# for fileira in fileiras:
+#     for cadeira in range(len(fileira)):
+#         if fileira[cadeira] == 0:
+#             if cadeira == 0:
+#                 distância_esquerda = 0
+#             else:
+#                 distância_esquerda = 1
+#             if cadeira == largura - 1:
+#                 distância_direita = 0
+#             else:
+#                 distância_direita = 1 
+        
+#             j = 1
+#             while cadeira - j > - 1:
+#                 if fileira[cadeira - j] == 0:
+#                     distância_esquerda += 1
+#                     j += 1
+#                 else:
+#                     break
+
+#             k = 1
+#             while cadeira + k < largura - 1:
+#                 if fileira[cadeira + k] == 0:
+#                     distância_direita += 1
+#                     k += 1
+#                 else:
+#                     break
+            
+#             if cadeira == 0 or cadeira == largura - 1:
+#                 if max([distância_esquerda, distância_direita]) > maior_distância:
+#                     maior_distância = max([distância_esquerda, distância_direita])
+#             else:
+#                 if min([distância_direita, distância_direita]) > maior_distância:
+#                     maior_distância = min([distância_esquerda, distância_direita])
+
+# print(maior_distância)
+
 tamanho, largura = [int(x) for x in input().split()]
 maior_distância = 0
 fileiras = []
@@ -41,38 +86,21 @@ for i in range(tamanho):
     fileiras.append(fileira)
 
 for fileira in fileiras:
-    for cadeira in range(len(fileira)):
-        if fileira[cadeira] == 0:
-            if cadeira == 0:
-                distância_esquerda = 0
-            else:
-                distância_esquerda = 1
-            if cadeira == largura - 1:
-                distância_direita = 0
-            else:
-                distância_direita = 1 
-        
-            j = 1
-            while cadeira - j > - 1:
-                if fileira[cadeira - j] == 0:
-                    distância_esquerda += 1
-                    j += 1
+    for i, cadeira in enumerate(fileira):
+        if cadeira == 0:
+            contador = 1
+            k = 1
+            while i + k < largura - 1:
+                k += 1
+                if fileira[i + k] == 0:
+                    contador += 1
                 else:
                     break
 
-            k = 1
-            while cadeira + k < largura - 1:
-                if fileira[cadeira + k] == 0:
-                    distância_direita += 1
-                    k += 1
-                else:
-                    break
-            
-            if cadeira == 0 or cadeira == largura - 1:
-                if max([distância_esquerda, distância_direita]) > maior_distância:
-                    maior_distância = max([distância_esquerda, distância_direita])
-            else:
-                if min([distância_direita, distância_direita]) > maior_distância:
-                    maior_distância = min([distância_esquerda, distância_direita])
+            print(contador)
+            if contador > maior_distância and (i == 0 or i == largura -1):
+                maior_distância = contador 
+            elif contador > maior_distância:
+                maior_distância = (contador + 1)//2
 
 print(maior_distância)
